@@ -5,7 +5,7 @@ export class PasswordValidators{
         let password = control.get('password');
         let confirmPassword = control.get('confirmPassword');
 
-        console.log(password);
+        // console.log(password);
         
         
         return password.value != confirmPassword.value ? { 'passwordError': true } : null;

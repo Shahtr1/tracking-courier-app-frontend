@@ -1,0 +1,12 @@
+<div class="form-group" [ngClass]="{'mb-0': showErrors()}">
+    <label for="{{ label_id }}">{{ label }}</label>
+    <input
+        id="{{ label_id }}"  
+        [type]="input_type" 
+        class="form-control"
+        [formControl]="control"
+        [title]="title">
+</div>
+<div *ngIf="showErrors()" class="alert alert-danger">
+    {{ getErrorMessage() }}
+</div>

@@ -1,62 +1,46 @@
 <div class="container jumbotron signup-form">
     <h1 class="text-center mt-2">Sign Up</h1>
+    <div  class="alert alert-danger" *ngIf="form.errors && form.errors.email ">{{ form.errors.email }}</div>
     <form
-    [formGroup]="form" 
+        [formGroup]="form"
+        (ngSubmit)="signUp()" 
         autocomplete="off">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input 
-                formControlName="username"
-                id="username" 
-                type="text" 
-                class="form-control">   
 
-            <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
-                <div *ngIf="username.errors.required">Username is required.</div>
-                <div *ngIf="username.errors.minlength">Username should be minimum {{ username.errors.minlength.requiredLength }} characters.</div>
-                <div *ngIf="username.errors.cannotContainSpace">Username cannot contain space.</div>
-                <div *ngIf="username.errors.pattern">Username should match pattern(4 aplha and 4 num)</div>
-            </div>     
-   
-        </div>
-    
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input 
-                formControlName="email"
-                id="email" 
-                type="email" 
-                class="form-control">
+        <app-input 
+            label="Username" 
+            label_id="username"
+            input_type="text"
+            [control]="form.get('name')"
+            title="4 aplha and 4 num"
+            ></app-input>
 
-            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-                <div *ngIf="email.errors.required">Email is required.</div>
-                <div *ngIf="email.errors.email">Not a valid email address!.</div>
-            </div>    
-        </div>
-    
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input 
-                formControlName="password"
-                id="password" 
-                type="password" 
-                class="form-control">
 
-            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
-                <div *ngIf="password.errors.required">Password is required.</div>
-                <div *ngIf="password.errors.minlength">Password should be minimum
-                     {{ password.errors.minlength.requiredLength }} characters in length.</div>
-            </div>     
-        </div>
+        <app-input 
+            label="Email" 
+            label_id="email"
+            input_type="text"
+            [control]="form.get('email')"
+            ></app-input>
+     
         
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input 
-                formControlName="confirmPassword"
-                id="confirmPassword" 
-                type="password" 
-                class="form-control">
-        </div>
+
+        <app-input 
+            label="Password" 
+            label_id="password"
+            input_type="password"
+            [control]="form.get('password')"
+            ></app-input>
+
+        <app-input 
+            label="Confirm Password" 
+            label_id="confirmPassword"
+            input_type="password"
+            [control]="form.get('confirmPassword')"
+            ></app-input>
+
+
+
+        
         <div *ngIf="confirmPassword.touched &&
             form.errors !== null && 
             form.errors.passwordError && 
@@ -64,6 +48,9 @@
             password.touched" class="alert alert-danger">
             Passwords should match!.
         </div>
-        <button class="btn btn-primary" type="submit">Sign Up</button>
+
+        <button class="btn btn-primary" 
+            [disabled]="form.invalid"
+            type="submit">Sign Up</button>
     </form>
 </div>
