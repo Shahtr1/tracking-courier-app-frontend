@@ -1,0 +1,10 @@
+.home-form{
+    width: 400px;
+    min-width: 400px;
+}
+
+.nav-active{
+    border-bottom: 1px solid black;
+}
+
+a { color: inherit; cursor: pointer; }

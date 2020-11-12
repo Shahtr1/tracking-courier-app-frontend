@@ -1,0 +1,9 @@
+<ng-container *ngIf="errors.serverErrors">
+    <div  *ngFor="let error of objectValues(errors.serverErrors)" class="alert alert-danger">
+        {{ error }}
+    </div>
+</ng-container>
+
+<div  *ngIf="errors && getErrorMessage()" class="alert alert-danger">
+    {{getErrorMessage() }}
+</div>

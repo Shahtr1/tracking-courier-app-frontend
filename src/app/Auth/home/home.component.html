@@ -1,0 +1,23 @@
+<div class="mt-5 container jumbotron home-form">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="text-center mt-2 pb-2" 
+                [class.nav-active]="viewMode == 'login'">
+                    <a (click)="viewMode = 'login'">Log In</a>
+            </h3>
+        </div>
+        <div class="col-6">
+            <h3 class="text-center mt-2 pb-2" 
+            [class.nav-active]="viewMode == 'signup'">
+                <a (click)="viewMode = 'signup'">Sign Up</a>
+            </h3>
+        </div>
+    </div>
+    <hr>
+    <ng-container [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'login'"><app-login></app-login></div>
+        <div *ngSwitchCase="'signup'"><app-signup></app-signup></div>
+    </ng-container>
+</div>
+
+

@@ -1,6 +1,5 @@
-<div class="container jumbotron signup-form">
-    <h1 class="text-center mt-2">Sign Up</h1>
-    <div  class="alert alert-danger" *ngIf="form.errors && form.errors.email ">{{ form.errors.email }}</div>
+<app-form-errors [errors]="form.errors" *ngIf="form.errors"></app-form-errors>
+
     <form
         [formGroup]="form"
         (ngSubmit)="signUp()" 
@@ -53,4 +52,3 @@
             [disabled]="form.invalid"
             type="submit">Sign Up</button>
     </form>
-</div>

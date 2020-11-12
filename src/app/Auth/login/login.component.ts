@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
       Validators.minLength(8)
     ])
   });
+  
 
   get email(){
     return this.form.get('email');
@@ -36,13 +37,37 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+
+
+
+    // if (this.form.invalid) {
+    //   return;
+    // }
+    
     this.authService.login(this.form.value)
       .subscribe(result => { 
         // console.log(result);
          
       },
       err => {
-        this.form.setErrors(err.error.errors);
+        
+        if (err.status == 401 && err.message) {
+          this.form.setErrors({
+            credentials: err.error.message,
+          });
+        } else if (err.status == 422) {
+          this.form.setErrors({
+            serverErrors: err.error.errors,
+          });
+        } else if (!err.status) {
+          this.form.setErrors({
+            noConnection: true,
+          });
+        } else {
+          this.form.setErrors({
+            unknownError: true,
+          });
+        }
       });
   }
 
