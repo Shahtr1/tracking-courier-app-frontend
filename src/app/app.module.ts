@@ -9,6 +9,12 @@ import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './Auth/login/login.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './Auth/home/home.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
+import { LogoutComponent } from './Auth/logout/logout.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +22,8 @@ import { HomeComponent } from './Auth/home/home.component';
     SignupComponent,
     LoginComponent,
     HomeComponent,
+    WelcomeComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,11 +31,24 @@ import { HomeComponent } from './Auth/home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    // RouterModule.forRoot([
-    //   { path: '', component: HomeComponent }
-    // ])
+    RouterModule.forRoot([
+      { path: '', component: WelcomeComponent },
+      { path: 'home', 
+        component: HomeComponent
+      },
+      { path: 'enquiries', 
+        component: EnquiryComponent,
+        canActivate: [AuthGuard] 
+      },
+      { path: 'logout',
+        component: LogoutComponent,
+        canActivate: [AuthGuard] 
+      },
+    ])
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
